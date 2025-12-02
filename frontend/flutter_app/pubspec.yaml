@@ -1,0 +1,27 @@
+name: jura_app
+description: Jura Lawyer Management - Multiplatform
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  provider: ^6.0.0
+  web_socket_channel: ^2.1.0
+  url_launcher: ^6.1.7
+  shared_preferences: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/splash-screen.png
+    - assets/splash-screen-black-BG.png
+    - assets/login-screen.png

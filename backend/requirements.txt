@@ -1,0 +1,13 @@
+Django>=4.2
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+channels
+channels_redis
+weasyprint
+dj-database-url
+psycopg2-binary
+python-dotenv
+whitenoise
+gunicorn
+Pillow

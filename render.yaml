@@ -1,0 +1,34 @@
+# render.yaml - example for Render.com
+services:
+  - type: web
+    name: jura-backend
+    env: docker
+    # If using a public repo use 'repo' config, otherwise create service in Render and link.
+    dockerfilePath: backend/Dockerfile
+    plan: standard
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: DATABASE_URL
+        # set to the managed Postgres connection string on Render
+        value: ${DATABASE_URL}
+      - key: REDIS_URL
+        value: ${REDIS_URL}
+      - key: SECRET_KEY
+        value: ${SECRET_KEY}
+      - key: DJANGO_SETTINGS_MODULE
+        value: jura_backend.settings
+      - key: DEBUG
+        value: "False"
+    # Optionally scale and replicas:
+    autoDeploy: true
+
+  - type: web
+    name: jura-frontend
+    env: docker
+    dockerfilePath: frontend/Dockerfile
+    plan: free
+    envVars:
+      - key: API_BASE_URL
+        value: ${API_BASE_URL}  # URL of the backend on Render (e.g. https://jura-backend.onrender.com)
+    autoDeploy: true
