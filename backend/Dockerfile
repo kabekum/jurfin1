@@ -20,9 +20,9 @@ FROM python:3.11-slim
 #    && rm -rf /var/lib/apt/lists/*
 
 # Create app user
-ENV APP_USER=app
-RUN useradd -ms /bin/bash ${APP_USER}
-WORKDIR /app
+##ENV APP_USER=app
+##RUN useradd -ms /bin/bash ${APP_USER}
+##WORKDIR /app
 
 # Copy dependency files first for caching
 COPY backend/requirements.txt /app/requirements.txt
@@ -30,11 +30,11 @@ RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r /app/requirements.txt
 
 # Copy the Django project
-COPY backend/ /app/
+##COPY backend/ /app/
 
 # Copy entrypoint
-COPY backend/entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+##COPY backend/entrypoint.sh /app/entrypoint.sh
+##RUN chmod +x /app/entrypoint.sh
 
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=jura_backend.settings
@@ -43,7 +43,7 @@ ENV PORT=8000
 # Expose port for HTTP/ASGI
 EXPOSE 8000
 
-USER ${APP_USER}
+##USER ${APP_USER}
 
 # Run migrations and start Daphne via entrypoint.sh
-ENTRYPOINT ["/app/entrypoint.sh"]
+##ENTRYPOINT ["/app/entrypoint.sh"]
