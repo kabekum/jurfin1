@@ -3,21 +3,21 @@ FROM python:3.11-slim
 
 # System deps for WeasyPrint and general tools
 #RUN apt-get update && apt-get install -y --no-install-recommends \
-#   build-essential \
-#  wget \
-# libffi-dev \
-#libpq-dev \
-#libxml2 \
-#libxml2-dev \
-#libjpeg-dev \
-#zlib1g-dev \
-#libpangocairo-1.0-0 \
-# libcairo2 \
-#libgdk-pixbuf2.0-0 \
-#fonts-liberation \
-# ca-certificates \
-# git \
-# && rm -rf /var/lib/apt/lists/*
+#    build-essential \
+#    wget \
+#    libffi-dev \
+#    libpq-dev \
+#    libxml2 \
+#    libxml2-dev \
+#    libjpeg-dev \
+#    zlib1g-dev \
+#    libpangocairo-1.0-0 \
+#    libcairo2 \
+#    libgdk-pixbuf2.0-0 \
+#    fonts-liberation \
+#    ca-certificates \
+#    git \
+#    && rm -rf /var/lib/apt/lists/*
 
 # Create app user
 ENV APP_USER=app
@@ -47,4 +47,3 @@ USER ${APP_USER}
 
 # Run migrations and start Daphne via entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
-
