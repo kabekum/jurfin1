@@ -12,6 +12,8 @@ COPY frontend/pubspec.* /app/
 COPY frontend/ /app/
 
 # Enable web build
+RUN rm -rf $FLUTTER_HOME
+
 RUN flutter channel stable && flutter upgrade
 RUN flutter pub get
 RUN flutter build web --web-renderer html --release
@@ -31,3 +33,4 @@ COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
