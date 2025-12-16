@@ -12,7 +12,12 @@ COPY frontend/pubspec.* /app/
 COPY frontend/ /app/
 
 # Enable web build
-RUN rm -rf $FLUTTER_HOME
+RUN git clone https://github.com/flutter/flutter.git /flutter
+RUN /flutter/bin/flutter doctor
+ENV PATH="/flutter/bin:${PATH}"
+
+# Set working directory
+WORKDIR /app
 
 RUN flutter channel stable && flutter upgrade
 RUN flutter pub get
@@ -33,4 +38,5 @@ COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
 
