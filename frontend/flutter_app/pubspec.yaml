@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^ 7.1.1
+  stream_transform: ^2.1.0
   http: ^1.1.0
   provider: ^6.0.0
   web_socket_channel: ^2.1.0
@@ -22,6 +24,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/splash-screen.png
-    - assets/splash-screen-black-BG.png
-    - assets/login-screen.png
+    - flutter_app/assets/splash-screen.png
+    - flutter_app/assets/splash-screen-black-BG.png
+    - flutter_app/assets/login-screen.png
