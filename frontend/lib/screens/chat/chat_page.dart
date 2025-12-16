@@ -1,3 +1,5 @@
+// chatpage.dart
+
 import 'package:flutter/material.dart';
 import '../../services/websocket_service.dart';
 
@@ -16,7 +18,11 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    ws.connect().listen((msg) {
+
+    // Connect to your server
+    ws.connect("ws://YOUR_SERVER/ws/chat/CASE_ID/");
+
+    ws.stream.listen((msg) {
       setState(() => messages.add(msg));
     });
   }
@@ -28,8 +34,10 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void send() {
-    ws.send(ctrl.text);
-    ctrl.clear();
+    if (ctrl.text.isNotEmpty) {
+      ws.send(ctrl.text);
+      ctrl.clear();
+    }
   }
 
   @override
@@ -40,7 +48,9 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: ListView(
-              children: messages.map((m) => ListTile(title: Text(m))).toList(),
+              children: messages
+                  .map((m) => ListTile(title: Text(m)))
+                  .toList(),
             ),
           ),
           Padding(
