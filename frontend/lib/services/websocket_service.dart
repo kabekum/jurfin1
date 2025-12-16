@@ -1,26 +1,27 @@
-import 'dart:convert';
+// websocket_service.dart
+
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:stream_transform/stream_transform.dart';
 
 class WebSocketService {
   WebSocketChannel? _channel;
 
-  void connectToCase(String baseWsUrl, String caseId) {
-    final url = Uri.parse('\$baseWsUrl/ws/chat/\$caseId/');
-    _channel = WebSocketChannel.connect(url);
+  /// Connect to websocket server
+  void connect(String url) {
+    _channel = WebSocketChannel.connect(Uri.parse(url));
   }
 
-  Stream<Map<String, dynamic>> messages() {
-    return _channel!.stream.map((e) => jsonDecode(e as String) as Map<String, dynamic>);
+  /// Expose raw stream (String messages)
+  Stream<String> get stream {
+    return _channel!.stream.map((event) => event.toString());
   }
 
-  void send(String message, String user) {
-    final payload = jsonEncode({'message': message, 'user': user});
-    _channel?.sink.add(payload);
+  /// Send a text message
+  void send(String message) {
+    _channel?.sink.add(message);
   }
 
+  /// Close connection
   void close() {
     _channel?.sink.close();
-    _channel = null;
   }
 }
